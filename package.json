@@ -4,7 +4,8 @@
   "description": "A Vue and GraphQL web app to view data from SpaceX",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/Yosefc/SpaceX-Vue/issues"
   },
-  "homepage": "https://github.com/Yosefc/SpaceX-Vue#readme"
+  "homepage": "https://github.com/Yosefc/SpaceX-Vue#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "nodemon": "^1.18.6"
+  }
 }
