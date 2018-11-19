@@ -1,0 +1,19 @@
+{
+  "name": "spacex-vue",
+  "version": "1.0.0",
+  "description": "A Vue and GraphQL web app to view data from SpaceX",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yosefc/SpaceX-Vue.git"
+  },
+  "author": "Yosef Connors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yosefc/SpaceX-Vue/issues"
+  },
+  "homepage": "https://github.com/Yosefc/SpaceX-Vue#readme"
+}
