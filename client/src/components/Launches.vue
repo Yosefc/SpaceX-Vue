@@ -12,14 +12,22 @@
             <p><span class="header">Details: </span><span>{{ launch.details }}</span></p> 
             <p><span class="header">Launch Date: </span><span>{{ launch.launch_date_local | moment("dddd, MMMM Do YYYY") }}</span></p>
             <p><span class="header">Launch Success: </span>
-              <span v-if="launch.launch_success"><span class="success">Success</span></span>
+              <span v-if="launch.launch_success"><span class="success">Successful</span></span>
               <span v-if="!launch.launch_success"><span class="failed">Failed</span></span>
             </p>
-            
           </div>
-           <div class="card-text text-right">
-            <button type="button" class="btn btn-primary"> <router-link to="/about" class="routerLink">Launch Details</router-link></button>
-           </div>
+          <div class="card-text text-right">
+            <router-link 
+              :to="{ 
+                path: 'mission_details', 
+                query: { 
+                  flight_number: `${launch.flight_number}` 
+                  }
+                }" 
+              class="routerLink">
+              <button type="button" class="btn btn-primary">Launch Details</button>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -32,7 +40,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      launches: {}
+      launches: ""
     };
   },
   mounted() {
@@ -60,30 +68,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.card {
-  margin: 5px;
-}
-.card-text {
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.header {
-  font-size: 1.3rem;
-}
-
-.success {
-  color: green;
-}
-
-.failed {
-  color: red;
-}
-
-.routerLink {
-  display: block;
-  color: rgb(244, 248, 248);
-  font-size: 18px;
-  font-weight: 400;
-}
 </style>
