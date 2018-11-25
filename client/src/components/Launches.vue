@@ -12,8 +12,14 @@
             <p><span class="header">Details: </span><span>{{ launch.details }}</span></p> 
             <p><span class="header">Launch Date: </span><span>{{ launch.launch_date_local | moment("dddd, MMMM Do YYYY") }}</span></p>
             <p><span class="header">Launch Success: </span>
-              <span v-if="launch.launch_success"><span class="success">Successful</span></span>
-              <span v-if="!launch.launch_success"><span class="failed">Failed</span></span>
+              <span :class="[launch.launch_success ? successClass : failureClass]">
+                <span v-if="launch.launch_success">
+                  Successful
+                </span>
+                <span v-else>
+                  Failed
+                </span>
+              </span>
             </p>
           </div>
           <div class="card-text text-right">
@@ -40,7 +46,13 @@ import axios from "axios";
 export default {
   data() {
     return {
-      launches: ""
+      launches: "",
+      successClass: {
+        success: "success"
+      },
+      failureClass: {
+        failed: "failed"
+      }
     };
   },
   mounted() {

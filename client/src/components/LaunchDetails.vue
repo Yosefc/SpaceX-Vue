@@ -5,20 +5,27 @@
           :key="launch.flight_number" 
           v-for="launch in launchDetails.data"
         >
+        <!-- <Launch :launch="launch"></Launch> -->
         <h4 class="card-header">Mission Name: {{ launch.mission_name }}</h4>
         <div class="card-body">
           <div class="card-text text-left">
-            <!-- <p><span class="header">Flight Number: </span><span>{{ launch.flight_number }}</span></p>  -->
             <div>
-              <img v-show="launch.links.mission_patch != null" class="mission_patch" :src="launch.links.mission_patch" alt="Mission Patch" height="150" width="150" align="right">
+              <img v-show="launch.links.mission_patch != null" class="mission_patch" :src="launch.links.mission_patch" alt="Mission Patch" width="150" height="150" align="right">
             </div>
             <p><span class="header">Details: </span><span>{{ launch.details }}</span></p> 
             <p><span class="header">Launch Date: </span><span>{{ launch.launch_date_local | moment("dddd, MMMM Do YYYY") }}</span></p>
-            <p><span class="header">Launch Success: </span>
-              <span v-if="launch.launch_success"><span class="success">Successful</span></span>
-              <span v-if="!launch.launch_success"><span class="failed">Failed</span></span>
+            <p>
+              <span class="header">Launch Success: </span>
+              <span :class="[launch.launch_success ? successClass : failureClass]">
+                <span v-if="launch.launch_success">
+                  Successful
+                </span>
+                <span v-else>
+                  Failed
+                </span>
+              </span>
             </p>
-            <hr style="background-color: white;">
+            <hr>
             <div class="text-center"><p><span class="header">Rocket Details </span></p></div>
             <p><span class="header">Rocket Id: </span><span>{{ launch.rocket.rocket_id }}</span></p>
             <p><span class="header">Rocket Type: </span><span>{{ launch.rocket.rocket_type }}</span></p>
@@ -39,7 +46,13 @@ import axios from "axios";
 export default {
   data() {
     return {
-      launchDetails: {}
+      launchDetails: {},
+      successClass: {
+        success: "success"
+      },
+      failureClass: {
+        failed: "failed"
+      }
     };
   },
   mounted() {
@@ -74,7 +87,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+hr {
+  background-color: white;
+}
+
 .mission_patch {
   padding-bottom: 25px;
+}
+
+@media only screen and (max-width: 750px) {
+  .mission_patch {
+    width: 100px;
+    height: 100px;
+  }
 }
 </style>
