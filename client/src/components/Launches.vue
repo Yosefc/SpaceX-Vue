@@ -3,6 +3,7 @@
     <h5>Loading...</h5>
   </div>
   <div v-else class="container">
+    
     <div class="row">
         <Launch 
         class="card border-primary col-lg-12" 
