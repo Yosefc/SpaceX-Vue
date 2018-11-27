@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <div class="input-group mb-3">
+  <div class="mb-3">
     <input 
       type="text" 
       class="form-control" 
@@ -9,20 +9,23 @@
       aria-describedby="basic-addon2"
       v-model="word"
       >
-  </div>
-  <div id="results" class="m" v-if="results && word">
+        <div id="results" class="resultsList" v-if="results && word">
     <div class="list-group" v-for="result in results" :key="result.flight_number">
       <h5 class="list-group-item list-group-item-action">
         <router-link id="mlist"
+        v-on:click.native="emptySearchResults"
         :to="{ 
           path: 'mission_details', 
           query: { 
-            flight_number: `${result.flight_number}` }}">
+            flight_number: `${result.flight_number}` }}"
+            >
             {{ result.mission_name }}
         </router-link>
       </h5>
     </div>
   </div>
+  </div>
+
 </div>
 </template>
 
@@ -33,6 +36,12 @@ export default {
       word: "",
       results: ""
     };
+  },
+  methods: {
+    emptySearchResults: function() {
+      this.word = "";
+      this.results = "";
+    }
   },
   watch: {
     word: function() {
@@ -50,14 +59,16 @@ input {
   font-size: 1.2rem;
 }
 
-.m {
-  position: absolute;
+.resultsList {
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  padding-left: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
   z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 118px;
   left: 21%;
   right: 21%;
-  padding: 0px;
 }
 </style>
-

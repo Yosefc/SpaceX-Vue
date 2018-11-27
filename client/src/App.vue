@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <img id="logo" alt="SpaceX logo" src="./assets/SpaceX_logo.jpg">
+    <a href="http://localhost:8080/"><img id="logo" alt="SpaceX logo" src="./assets/SpaceX_logo.jpg"></a>
     <search-component/>
-    <router-view/>
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
