@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div id="loader" v-if="!launchDetails.data">
+      <h5>{{ msg }}</h5>
+    </div>
     <div class="row">
       <div class="card border-primary col-lg-12" 
           :key="launch.flight_number" 
@@ -51,20 +54,20 @@ export default {
       },
       failureClass: {
         failed: "failed"
-      }
+      },
+      msg: "Loading.."
     };
   },
   async created() {
     try {
       this.launchDetails = await singleLaunchService.singleLaunch(this.$route.query.flight_number);
     } catch (error) {
-      this.launchDetails = error;
+      this.msg = "Oh snap! We weren't able to the retrieve data..";
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 hr {
   background-color: white;
@@ -72,6 +75,10 @@ hr {
 
 .mission_patch {
   padding-bottom: 25px;
+}
+
+#loader {
+  padding-top: 50px;
 }
 
 @media only screen and (max-width: 750px) {
