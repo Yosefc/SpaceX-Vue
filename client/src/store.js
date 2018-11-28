@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
+import singleLaunchService from "./services/LaunchService";
 
 Vue.use(Vuex);
 
@@ -14,22 +14,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    fetchLaunches({ commit }) {
+    async fetchLaunches({ commit }) {
       try {
-        axios
-          .post("http://localhost:4000/graphql", {
-            query: `{
-              Launches {
-                flight_number
-                mission_name
-                launch_year
-                launch_date_local
-                launch_success
-                details
-              }
-            }`
-          })
-          .then(res => commit("updateLaunches", res.data));
+        commit("updateLaunches", await singleLaunchService.allLaunches());
       } catch (error) {
         commit("updateLaunches", error);
       }

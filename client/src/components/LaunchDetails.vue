@@ -5,7 +5,6 @@
           :key="launch.flight_number" 
           v-for="launch in launchDetails.data"
         >
-        <!-- <Launch :launch="launch"></Launch> -->
         <h4 class="card-header">Mission Name: {{ launch.mission_name }}</h4>
         <div class="card-body">
           <div class="card-text text-left">
@@ -41,12 +40,12 @@
 </template>
 
 <script>
-import axios from "axios";
+import singleLaunchService from "../services/LaunchService";
 
 export default {
   data() {
     return {
-      launchDetails: {},
+      launchDetails: "",
       successClass: {
         success: "success"
       },
@@ -55,29 +54,9 @@ export default {
       }
     };
   },
-  mounted() {
+  async created() {
     try {
-      axios
-        .post("http://localhost:4000/graphql", {
-          query: `{
-          Launch(flight_number: ${this.$route.query.flight_number}) {
-            flight_number
-            mission_name
-            launch_success
-            launch_date_local
-            details
-            rocket {
-              rocket_id
-              rocket_type
-            }
-            links {
-              mission_patch
-              wikipedia
-            }
-          }
-        }`
-        })
-        .then(res => (this.launchDetails = res.data));
+      this.launchDetails = await singleLaunchService.singleLaunch(this.$route.query.flight_number);
     } catch (error) {
       this.launchDetails = error;
     }

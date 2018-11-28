@@ -9,7 +9,7 @@
       aria-describedby="basic-addon2"
       v-model="word"
       >
-        <div id="results" class="resultsList" v-if="results && word">
+    <div id="results" class="resultsList" v-if="results && word">
     <div class="list-group" v-for="result in results" :key="result.flight_number">
       <h5 class="list-group-item list-group-item-action">
         <router-link id="mlist"
