@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container containerMaxHeight">
   <div class="mb-3">
     <input 
       type="text" 
@@ -8,28 +8,22 @@
       aria-label="Search Launches" 
       aria-describedby="basic-addon2"
       v-model="word"
-      >
-    <div id="results" class="resultsList" v-if="results && word">
-    <div class="list-group" v-for="result in results" :key="result.flight_number">
-      <h5 class="list-group-item list-group-item-action">
-        <router-link id="mlist"
-        v-on:click.native="emptySearchResults"
-        :to="{ 
-          path: 'mission_details', 
-          query: { 
-            flight_number: `${result.flight_number}` }}"
-            >
-            {{ result.mission_name }}
-        </router-link>
-      </h5>
+    >
+    <div v-if="word && results" class="resultsList">
+      <result
+      v-for="result in results"
+      :key="result.flight_number"
+      :result="result"
+      v-on:click.native="emptySearchResults"
+      ></result>
     </div>
   </div>
-  </div>
-
 </div>
 </template>
 
 <script>
+import Result from "./SearchResults";
+
 export default {
   data() {
     return {
@@ -49,6 +43,9 @@ export default {
         launch.mission_name.toLowerCase().includes(this.word.toLowerCase())
       );
     }
+  },
+  components: {
+    Result
   }
 };
 </script>
@@ -57,6 +54,10 @@ export default {
 input {
   height: 41px;
   font-size: 1.2rem;
+}
+
+.containerMaxHeight {
+  max-height: 41px;
 }
 
 .resultsList {
