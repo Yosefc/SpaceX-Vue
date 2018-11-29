@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <a href="http://localhost:8080/"><img id="logo" alt="SpaceX logo" src="./assets/SpaceX_logo.jpg"></a>
+    <router-link to="/"><img id="logo" alt="SpaceX logo" src="./assets/SpaceX_logo.jpg"></router-link>
+    <p id="developer">Developed by <a href="https://github.com/yosefc">Yosef Connors</a></p>
     <search-component/>
     <router-view :key="$route.fullPath"/>
   </div>
@@ -74,6 +75,19 @@ export default {
 a:hover {
   color: rgb(244, 248, 248);
   text-decoration: none;
+}
+
+#developer {
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+#developer a {
+  color: #eee7e7;
+}
+
+#developer a:hover {
+  color: #2a9fd6;
 }
 
 @media only screen and (max-width: 750px) {

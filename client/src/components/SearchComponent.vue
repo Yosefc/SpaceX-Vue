@@ -9,7 +9,7 @@
       aria-describedby="basic-addon2"
       v-model="word"
     >
-    <div v-if="word && results" class="resultsList">
+    <div v-if="word" class="resultsList">
       <result
       v-for="result in results"
       :key="result.flight_number"
@@ -27,19 +27,17 @@ import Result from "./SearchResults";
 export default {
   data() {
     return {
-      word: "",
-      results: ""
+      word: ""
     };
   },
   methods: {
     emptySearchResults: function() {
       this.word = "";
-      this.results = "";
     }
   },
-  watch: {
-    word: function() {
-      this.results = this.$store.state.launches.data.Launches.filter(launch =>
+  computed: {
+    results() {
+      return this.$store.state.launches.data.Launches.filter(launch =>
         launch.mission_name.toLowerCase().includes(this.word.toLowerCase())
       );
     }

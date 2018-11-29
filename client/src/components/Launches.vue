@@ -27,9 +27,15 @@ export default {
   },
   computed: {
     getAllLaunches() {
-      if (this.$store.state.launches.response)
-        this.msg = "Oh snap! We weren't able to the retrieve data..";
+      if (this.$store.state.launches.response) {
+        this.changeMsg("Oh snap! We weren't able to the retrieve data..");
+      }
       return this.$store.state.launches;
+    }
+  },
+  methods: {
+    changeMsg(newMessage) {
+      this.msg = newMessage;
     }
   },
   mounted() {

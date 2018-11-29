@@ -1,5 +1,5 @@
 const axios = require("axios");
-const url = "http://localhost:4000/graphql";
+const url = "graphql";
 
 class LaunchService {
   static singleLaunch(flightNumber) {

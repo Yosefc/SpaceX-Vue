@@ -4,8 +4,8 @@
   "description": "A Vue and GraphQL web app to view data from SpaceX",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
